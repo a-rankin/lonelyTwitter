@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -33,6 +34,26 @@ public class LonelyTwitterActivityUITest extends
 
 		textInput = ((EditText) activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.body));
 	}
+	
+	public void testSetText() {
+		String text = "near!";
+		instrumentation.runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				textInput.setText("near!");
+			}
+		});
+		
+		instrumentation.waitForIdleSync();
+		
+		textInput.setText(text);
+		assertEquals("does equals true?", text, textInput.getText().toString());
+		
+	}
+	
+
+		
+	
 	
 	/*
 	 * fills in the input text field and clicks the 'save'
